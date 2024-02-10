@@ -1,0 +1,10 @@
+name: parsexlsx_customer
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - conda-forge::numpy=1.19.2
+  - conda-forge::pandas=1.4.1
+  - conda-forge::pyyaml=6.0.1
+  - conda-forge::openpyxl

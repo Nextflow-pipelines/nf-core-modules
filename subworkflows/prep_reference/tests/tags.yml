@@ -1,0 +1,2 @@
+subworkflows/prep_reference:
+  - subworkflows/local/prep_reference/**

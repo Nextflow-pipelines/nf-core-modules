@@ -1,0 +1,2 @@
+fastqscreen:
+  - "modules/local/fastqscreen/**"

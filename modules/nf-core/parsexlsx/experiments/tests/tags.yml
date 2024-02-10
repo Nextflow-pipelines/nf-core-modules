@@ -1,0 +1,2 @@
+parsexlsx/experiments:
+  - "modules/local/parsexlsx/experiments/**"

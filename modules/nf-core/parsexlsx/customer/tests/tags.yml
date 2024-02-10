@@ -1,0 +1,2 @@
+parsexlsx/customer:
+  - "modules/local/parsexlsx/customer/**"

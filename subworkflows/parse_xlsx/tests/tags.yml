@@ -1,0 +1,2 @@
+subworkflows/parse_xlsx:
+  - subworkflows/local/parse_xlsx/**

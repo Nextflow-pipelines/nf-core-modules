@@ -1,0 +1,2 @@
+parsexlsx/organism:
+  - "modules/local/parsexlsx/organism/**"
