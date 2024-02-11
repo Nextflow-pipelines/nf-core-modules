@@ -1,0 +1,2 @@
+createreport/docx:
+  - "modules/nf-core/createreport/docx/**"
