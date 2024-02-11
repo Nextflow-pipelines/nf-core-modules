@@ -1,2 +1,2 @@
 subworkflows/parse_xlsx:
-  - subworkflows/local/parse_xlsx/**
+  - subworkflows/nf-core/parse_xlsx/**
