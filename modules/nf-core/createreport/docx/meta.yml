@@ -2,11 +2,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "createreport_docx"
 ## TODO nf-core: Add a description of the module and list keywords
-description: write your description here
+description: create a docx report about this analysis
 keywords:
-  - sort
-  - example
-  - genomics
+  - create
+  - report
+  - docx
 tools:
   - "createreport":
       ## TODO nf-core: Add a description and other details for the software below
@@ -15,41 +15,43 @@ tools:
       documentation: ""
       tool_dev_url: ""
       doi: ""
-      licence: 
+      licence:
 
 ## TODO nf-core: Add a description of all of the variables used as input
 input:
-  # Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-  
   ## TODO nf-core: Delete / customise this example input
-  - bam:
+  - customer_info:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: Yaml file
+      pattern: "*.yml"
+  - software_versions:
+      type: file
+      description: Yaml file
+      pattern: "*.yml"
+  - docx_template:
+      type: file
+      description: Docx file
+      pattern: "*.docx"
+  - workflow_picture:
+      type: file
+      description: Png file
+      pattern: "*.png"
 
 ## TODO nf-core: Add a description of all of the variables used as output
 output:
-  #Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-  
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
   ## TODO nf-core: Delete / customise this example output
-  - bam:
+  - report:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: Docx report
+      pattern: "*.docx"
+  - informations:
+      type: file
+      description: Yaml file
+      pattern: "*.yml"
 
 authors:
   - "@iyamaguchi"
