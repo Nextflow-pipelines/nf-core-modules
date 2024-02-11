@@ -2,11 +2,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "parsexlsx_organism"
 ## TODO nf-core: Add a description of the module and list keywords
-description: write your description here
+description: parse xlsx file and pick organism information
 keywords:
-  - sort
-  - example
-  - genomics
+  - parse
+  - xlsx
+  - organism
 tools:
   - "parsexlsx":
       ## TODO nf-core: Add a description and other details for the software below
@@ -15,16 +15,16 @@ tools:
       documentation: ""
       tool_dev_url: ""
       doi: ""
-      licence: 
+      licence:
 
 ## TODO nf-core: Add a description of all of the variables used as input
 input:
   #
   ## TODO nf-core: Delete / customise this example input
-  - bam:
+  - xlsx:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: Xlsx file
+      pattern: "*.xlsx"
 
 ## TODO nf-core: Add a description of all of the variables used as output
 output:
@@ -34,10 +34,10 @@ output:
       description: File containing software versions
       pattern: "versions.yml"
   ## TODO nf-core: Delete / customise this example output
-  - bam:
+  - yaml:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: Yaml file
+      pattern: "*.yml"
 
 authors:
   - "@iyamaguchi"
