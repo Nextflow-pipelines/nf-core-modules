@@ -1,0 +1,49 @@
+{
+    "cage - pe - xlsx": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "concs": [
+                    
+                ],
+                "informations": [
+                    
+                ],
+                "samples": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-02-11T22:26:00.102004"
+    },
+    "parse_xlsx": {
+        "content": [
+            [
+                
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-02-11T22:26:00.119353"
+    }
+}

@@ -9,7 +9,13 @@ nextflow_workflow {
     // TODO nf-core: Add tags for all modules used within this subworkflow. Example:
     tag "subworkflows"
     tag "subworkflows_nfcore"
-    tag "subworkflows/prep_reference"
+    tag "subworkflows/parse_xlsx"
+    tag "subworkflows/parse_xlsx"
+    tag "parsexlsx/concs"
+    tag "parsexlsx/samples"
+    tag "parsexlsx/customer"
+    tag "parsexlsx/organism"
+    tag "parsexlsx/experiments"
 
 
     // TODO nf-core: Change the test name preferably indicating the test-data and file-format used
