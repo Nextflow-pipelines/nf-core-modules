@@ -1,0 +1,17 @@
+- name: parse_xlsx test_parse_xlsx
+  command: nextflow run ./tests/subworkflows/nf-core/parse_xlsx -entry test_parse_xlsx -c ./tests/config/nextflow.config
+  tags:
+    - parsexlsx/organism
+    - parsexlsx/experiments
+    - parsexlsx/customer
+    - parsexlsx/concs
+    - parsexlsx/samples
+    - subworkflows
+    - subworkflows/parse_xlsx
+  files:
+    - path: output/parsexlsx/samplesheet.csv
+    - path: output/parsexlsx/control_case.csv
+    - path: output/parsexlsx/combinationinfo.yml
+    - path: output/parsexlsx/environment.yml
+    - path: output/parsexlsx/organisminfo.yml
+    - path: output/parsexlsx/sampleinfo.yml

@@ -19,9 +19,7 @@ nextflow_workflow {
             workflow {
                 """
                 // TODO nf-core: define inputs of the workflow here. Example:
-                input[0] = [ [ id:'test', single_end:false ], // meta map
-                        file(params.test_data['generic']['xlsx']['test_xlsx'], checkIfExists: true)
-                        ]
+                input[0] = file(params.test_data['generic']['xlsx']['test_xlsx'], checkIfExists: true)
                 """
             }
         }
@@ -31,6 +29,10 @@ nextflow_workflow {
                 { assert workflow.success},
                 { assert snapshot(workflow.out).match()}
                 //TODO nf-core: Add all required assertions to verify the test output.
+                { assert workflow.out.samples ==~ "samplesheet.csv" },
+                { assert workflow.out.concs ==~ "control_case.csv" },
+                { assert workflow.out.informations ==~ "*.yml" },
+                { assert snapshot(workflow.out.versions).match("parse_xlsx") }
             )
         }
     }
