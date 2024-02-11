@@ -2332,6 +2332,9 @@ subworkflows/initialise:
 subworkflows/multiple_impute_glimpse2:
   - subworkflows/nf-core/multiple_impute_glimpse2/**
   - tests/subworkflows/nf-core/multiple_impute_glimpse2/**
+subworkflows/parse_xlsx:
+  - subworkflows/nf-core/parse_xlsx/**
+  - tests/subworkflows/nf-core/parse_xlsx/**
 subworkflows/utils_nextflow_pipeline:
   - subworkflows/nf-core/utils_nextflow_pipeline/**
   - tests/subworkflows/nf-core/utils_nextflow_pipeline/**
