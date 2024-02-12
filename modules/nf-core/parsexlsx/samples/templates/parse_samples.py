@@ -41,8 +41,8 @@ sdf.set_index('id').to_csv("samplesheet.csv")
 
 # make sample information
 
-gsdf = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original'])['lane', 'fastq_1'].apply(lambda x: dict(x.values)).to_frame(name='fastq_1')
-gsdf['fastq_2'] = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original'])['lane', 'fastq_2'].apply(lambda x: dict(x.values))
+gsdf = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original'])[['lane', 'fastq_1']].apply(lambda x: dict(x.values)).to_frame(name='fastq_1')
+gsdf['fastq_2'] = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original'])[['lane', 'fastq_2']].apply(lambda x: dict(x.values))
 
 gsdf['calc_read_num_1'] = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original'])['read_num_1'].sum()
 gsdf['calc_read_num_2'] = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original'])['read_num_2'].sum()
