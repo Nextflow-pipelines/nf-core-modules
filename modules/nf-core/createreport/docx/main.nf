@@ -38,7 +38,7 @@ process CREATEREPORT_DOCX {
     path(customer_info)
     path(software_versions)
     path(docx_template)
-    path(workflow_picture)
+    path(pictures)
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
@@ -64,7 +64,6 @@ process CREATEREPORT_DOCX {
     //
 
     template 'make_docx_report.py'
-
 
     stub:
     def args = task.ext.args ?: ''

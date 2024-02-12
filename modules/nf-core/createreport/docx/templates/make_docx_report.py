@@ -11,86 +11,6 @@ from docx.enum.table import WD_ROW_HEIGHT, WD_ROW_HEIGHT_RULE
 
 dtnow = datetime.now()
 
-class DisplayablePath(object):
-    display_filename_prefix_middle = '├──'
-    display_filename_prefix_last = '└──'
-    display_parent_prefix_middle = '    '
-    display_parent_prefix_last = '│   '
-
-    def __init__(self, path, parent_path, is_last):
-        self.path = Path(str(path))
-        self.parent = parent_path
-        self.is_last = is_last
-        if self.parent:
-            self.depth = self.parent.depth + 1
-        else:
-            self.depth = 0
-
-    @property
-    def displayname(self):
-        if self.path.is_dir():
-            return self.path.name + '/'
-        return self.path.name
-
-    @classmethod
-    def make_tree(cls, root, parent=None, is_last=False, criteria=None):
-        root = Path(str(root))
-        criteria = criteria or cls._default_criteria
-
-        displayable_root = cls(root, parent, is_last)
-        yield displayable_root
-
-        children = sorted(list(path
-                            for path in root.iterdir()
-                            if criteria(path)),
-                            key=lambda s: str(s).lower())
-        count = 1
-        for path in children:
-            is_last = count == len(children)
-            if path.is_dir():
-                yield from cls.make_tree(path,
-                                        parent=displayable_root,
-                                        is_last=is_last,
-                                        criteria=criteria)
-            else:
-                yield cls(path, displayable_root, is_last)
-            count += 1
-
-    @classmethod
-    def _default_criteria(cls, path):
-        return( re.match('\..*', path.name) is None )
-
-    @property
-    def displayname(self):
-        if self.path.is_dir():
-            return self.path.name + '/'
-        return self.path.name
-
-    def displayable(self):
-        if self.parent is None:
-            return self.displayname
-
-        _filename_prefix = (self.display_filename_prefix_last
-                            if self.is_last
-                            else self.display_filename_prefix_middle)
-
-        parts = ['{!s} {!s}'.format(_filename_prefix,
-                                    self.displayname)]
-
-        parent = self.parent
-        while parent and parent.parent is not None:
-            parts.append(self.display_parent_prefix_middle
-                        if parent.is_last
-                        else self.display_parent_prefix_last)
-            parent = parent.parent
-
-        return ''.join(reversed(parts))
-
-
-def getTree(mInfo):
-    paths = DisplayablePath.make_tree(Path(mInfo["tree_root"]))
-    return('\n'.join([path.displayable() for path in paths]))
-
 def testKeys_old(keys, text):
     hitKeys = []
     for key in keys:
@@ -139,7 +59,8 @@ def modPictutre(doc):
 
     tags = {
             'WORKFLOW' : ["workflow.png", 15, 20, "図1. 解析ワークフロー"],
-            'HEATMAP' : ["heatmap.png", 15, 10, "図2. 発現遺伝子のクラスタリング結果(ヒートマップ)"]
+            'CONTENTS' : ["contents.png", 15, 10, "図2. 解析フォルダ構成"]
+            #'HEATMAP' : ["heatmap.png", 15, 10, "図2. 発現遺伝子のクラスタリング結果(ヒートマップ)"]
         }
     keys = tags.keys()
 
@@ -240,10 +161,11 @@ def main():
     """
 
     """インプットファイルの解析"""
-    customer_info = ""
-    software_versions = ""
-    template = ""
-    workflowpic = ""
+    customer_info = "${customer_info}"
+    software_versions = "${software_versions}"
+    template = "${docx_template}"
+    workflowpic = "${pictures[0]}"
+    contentspic = "${pictures[1]}"
     outdir = '.'
 
     """all_informations.ymlの作成"""
@@ -273,13 +195,14 @@ def main():
     font.name = 'Arial'
 
     workflow = doc.add_picture(workflowpic), width=Cm(15), height=Cm(20))
+    contents = doc.add_picture(contentspic), width=Cm(15), height=Cm(20))
     #heatmap =  doc.add_picture('heatmap.png', width=Cm(15), height=Cm(10))
 
     #fastq = readJsonTable(fastqd, select=['actual_read_num', 'min_len' ,'avg_len', 'max_len'], csep=True)
     #mapping = readJsonTable(samples,  select=['mapping_input_reads', 'unmapped_reads' ,'rrna_reads', 'total_mapped_reads', 'unique_mapped_reads'])
 
-    #modDocument(doc, analysis)
-    #modPictutre(doc)
+    modDocument(doc, analysis)
+    modPictutre(doc)
 
     #if 'STAR_RSEM' in os.path.basename(args.template):
     #    addJsonTable(doc.tables[0], fastq)
@@ -289,8 +212,8 @@ def main():
     #    addInfoTable(doc.tables[3], analysis)
     #else:
     #    addJsonTable(doc.tables[0], fastq)
-        #addJsonTable(doc.tables[1], mapping)
-        #addMappingTable(doc.tables[1], star_mapping)
+    #    addJsonTable(doc.tables[1], mapping)
+    #    addMappingTable(doc.tables[1], star_mapping)
     #    addInfoTable(doc.tables[1], analysis)
 
 
