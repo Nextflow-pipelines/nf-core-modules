@@ -17,8 +17,6 @@ nextflow_workflow {
     tag "parsexlsx/organism"
     tag "parsexlsx/experiments"
 
-
-    // TODO nf-core: Change the test name preferably indicating the test-data and file-format used
     test("cage - pe - xlsx") {
 
         when {

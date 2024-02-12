@@ -30,7 +30,8 @@ for c in ['group', 'sample', 'directory', 'fastq_1', 'fastq_2']:
     sdf[c] = sdf[c].str.replace(' ', '')
 
 sdf = sdf[sdf['fastq_1'] != 'NoData']
-lane = sdf.groupby(['group', 'sample'])['fastq_1'].apply(lambda x: [i+1 for i,j in enumerate(x)])
+
+lane = sdf.groupby(['group', 'sample'], as_index=False)['fastq_1'].apply(lambda x: [i+1 for i,j in enumerate(x)]).explode('fastq_1')['fastq_1'].tolist()
 sdf['lane'] = lane
 sdf = sdf.loc[:,['group', 'sample', 'group_original', 'sample_original', 'directory', 'lane', 'fastq_1', 'fastq_2', 'read_num_1', 'read_num_2']]
 sdf['id'] = sdf['group'] + '_' + sdf['sample']
