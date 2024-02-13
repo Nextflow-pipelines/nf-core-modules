@@ -1,5 +1,5 @@
 repository_type: modules
-org_path: nf-core
+org_path: iyamaguchi/nf-core
 bump-versions:
   rseqc/junctionannotation: False
   rseqc/bamstat: False
