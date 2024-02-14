@@ -35,11 +35,11 @@ process SEQKIT_SUBSEQ {
     //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta), path(bam)
+    tuple val(meta), path(reads, stageAs: "input*/*")
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
-    tuple val(meta), path("*.bam"), emit: bam
+    tuple val(meta), path("*.adjusted.fastq.gz"), emit: adjusted_resds
     // TODO nf-core: List additional required output channels/values here
     path "versions.yml"           , emit: versions
 
@@ -48,7 +48,9 @@ process SEQKIT_SUBSEQ {
 
     script:
     def args = task.ext.args ?: ''
+    def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def readList = reads instanceof List ? reads.collect{ it.toString() } : [reads.toString()]
     // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
     //               If the software is unable to output a version number on the command-line then it can be manually specified
     //               e.g. https://github.com/nf-core/modules/blob/master/modules/nf-core/homer/annotatepeaks/main.nf
@@ -58,20 +60,42 @@ process SEQKIT_SUBSEQ {
     //               using the Nextflow "task" variable e.g. "--threads $task.cpus"
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
-    """
-    samtools \\
-        sort \\
-        $args \\
-        -@ $task.cpus \\
-        -o ${prefix}.bam \\
-        -T $prefix \\
-        $bam
+    if (meta.single_end) {
+        """
+        seqkit \\
+            subseq \\
+            $args \\
+            -j $task.cpus \\
+            -o ${prefix}.adjusted.fastq.gz \\
+            $reads
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        seqkit: \$(samtools --version |& sed '1!d ; s/samtools //')
-    END_VERSIONS
-    """
+        cat <<-END_VERSIONS > versions.yml
+        "${task.process}":
+            seqkit: \$(seqkit version | cut -d " " -f 2)
+        END_VERSIONS
+        """
+    } else {
+        """
+        seqkit \\
+            subseq \\
+            $args2 \\
+            -j $task.cpus \\
+            -o ${prefix}_R1.adjusted.fastq.gz \\
+            input1/*fastq.gz
+
+        seqkit \\
+            subseq \\
+            $args2 \\
+            -j $task.cpus \\
+            -o ${prefix}_R2.adjusted.fastq.gz \\
+            input2/*.fastq.gz
+
+        cat <<-END_VERSIONS > versions.yml
+        "${task.process}":
+            seqkit: \$(seqkit version | cut -d " " -f 2)
+        END_VERSIONS
+        """
+    }
 
     stub:
     def args = task.ext.args ?: ''
@@ -80,12 +104,25 @@ process SEQKIT_SUBSEQ {
     //               Have a look at the following examples:
     //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
     //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
-    """
-    touch ${prefix}.bam
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        seqkit: \$(samtools --version |& sed '1!d ; s/samtools //')
-    END_VERSIONS
-    """
+    if (meta.single_end) {
+        """
+        touch ${prefix}.adjusted.fastq.gz
+
+        cat <<-END_VERSIONS > versions.yml
+        "${task.process}":
+            seqkit: \$(seqkit version | cut -d " " -f 2)
+        END_VERSIONS
+        """
+    } else {
+        """
+        touch ${prefix}_R1.adjusted.fastq.gz
+        touch ${prefix}_R2.adjusted.fastq.gz
+
+        cat <<-END_VERSIONS > versions.yml
+        "${task.process}":
+            seqkit: \$(seqkit version | cut -d " " -f 2)
+        END_VERSIONS
+        """
+    }
 }
