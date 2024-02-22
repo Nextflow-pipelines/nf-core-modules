@@ -25,8 +25,8 @@ process PARSEXLSX_CONCS {
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/dajin2:0.4.0':
-        'biocontainers/dajin2:0.4.0' }"
+        'https://depot.galaxyproject.org/singularity/pandas:1.5.2':
+        'biocontainers/pandas:1.5.2' }"
 
     input:
     // TODO nf-core: Where applicable all sample-specific information e.g. "id", "single_end", "read_group"

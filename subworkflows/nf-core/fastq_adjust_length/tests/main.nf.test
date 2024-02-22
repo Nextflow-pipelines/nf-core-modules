@@ -4,7 +4,7 @@ nextflow_workflow {
 
     name "test subworkflow fastq_adjust_length"
     script "../main.nf"
-    workflow "fastq_adjust_length"
+    workflow "FASTQ_ADJUST_LENGTH"
 
     tag "subworkflows"
     tag "subworkflows_nfcore"

@@ -25,8 +25,8 @@ process SEQKIT_SUBSEQ {
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-        'biocontainers/YOUR-TOOL-HERE' }"
+        'https://depot.galaxyproject.org/singularity/seqkit:2.7.0--h9ee0642_0':
+        'biocontainers/seqkit:2.7.0' }"
 
     input:
     // TODO nf-core: Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
