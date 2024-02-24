@@ -1,0 +1,2 @@
+rseqc/genebodycoverage2:
+  - "modules/nf-core/rseqc/genebodycoverage2/**"
