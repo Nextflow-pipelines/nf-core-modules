@@ -32,8 +32,10 @@ for c in ['group', 'sample', 'directory', 'fastq_1', 'fastq_2']:
 sdf = sdf[sdf['fastq_1'] != 'NoData']
 
 lane = sdf.groupby(['group', 'sample'], as_index=False)['fastq_1'].apply(lambda x: [i+1 for i,j in enumerate(x)]).explode('fastq_1')['fastq_1'].tolist()
+status = sdf.groupby(['group'], as_index=False)['group'].apply(lambda x: [i for i,j in enumerate(x)]).explode('group').index.tolist()
 sdf['lane'] = lane
-sdf = sdf.loc[:,['group', 'sample', 'group_original', 'sample_original', 'directory', 'lane', 'fastq_1', 'fastq_2', 'read_num_1', 'read_num_2']]
+sdf['status'] = status
+sdf = sdf.loc[:,['group', 'sample', 'group_original', 'sample_original', 'directory', 'status', 'lane', 'fastq_1', 'fastq_2', 'read_num_1', 'read_num_2']]
 sdf['id'] = sdf['group'] + '_' + sdf['sample']
 
 # write samplesheet to csv
@@ -41,11 +43,11 @@ sdf.set_index('id').to_csv("samplesheet.csv")
 
 # make sample information
 
-gsdf = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original'])[['lane', 'fastq_1']].apply(lambda x: dict(x.values)).to_frame(name='fastq_1')
-gsdf['fastq_2'] = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original'])[['lane', 'fastq_2']].apply(lambda x: dict(x.values))
+gsdf = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original', 'status'])[['lane', 'fastq_1']].apply(lambda x: dict(x.values)).to_frame(name='fastq_1')
+gsdf['fastq_2'] = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original', 'status'])[['lane', 'fastq_2']].apply(lambda x: dict(x.values))
 
-gsdf['calc_read_num_1'] = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original'])['read_num_1'].sum()
-gsdf['calc_read_num_2'] = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original'])['read_num_2'].sum()
+gsdf['calc_read_num_1'] = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original', 'status'])['read_num_1'].sum()
+gsdf['calc_read_num_2'] = sdf.groupby(['id', 'group', 'sample', 'group_original', 'sample_original', 'status'])['read_num_2'].sum()
 
 dgsdf = gsdf.reset_index().set_index('id').T.to_dict()
 

@@ -194,8 +194,8 @@ def main():
     font = style.font
     font.name = 'Arial'
 
-    workflow = doc.add_picture(workflowpic), width=Cm(15), height=Cm(20))
-    contents = doc.add_picture(contentspic), width=Cm(15), height=Cm(20))
+    workflow = doc.add_picture(workflowpic, width=Cm(15), height=Cm(20))
+    contents = doc.add_picture(contentspic, width=Cm(15), height=Cm(20))
     #heatmap =  doc.add_picture('heatmap.png', width=Cm(15), height=Cm(10))
 
     #fastq = readJsonTable(fastqd, select=['actual_read_num', 'min_len' ,'avg_len', 'max_len'], csep=True)

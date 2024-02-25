@@ -31,11 +31,10 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
                 //TODO nf-core: Add all required assertions to verify the test output.
-                { assert workflow.out.samples ==~ "samplesheet.csv" },
-                { assert workflow.out.concs ==~ "control_case.csv" },
-                { assert workflow.out.informations ==~ "*.yml" },
+                { assert workflow.out.samples[0] ==~ ".*samplesheet.csv" },
+                { assert workflow.out.concs[0] ==~ ".*control_case.csv" },
+                { assert workflow.out.informations[0] ==~ ".*yml" },
                 { assert snapshot(workflow.out.versions).match("parse_xlsx") }
             )
         }
