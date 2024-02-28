@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "summerize_vcf"
+## TODO nf-core: Add a description of the subworkflow and list keywords
+description: Summerize VCF file
+keywords:
+  - merge
+  - query
+  - filter
+  - norm
+  - sort
+  - index
+  - vcf
+  - bcf
+## TODO nf-core: Add a list of the modules and/or subworkflows used in the subworkflow
+components:
+  - bcftools/merge
+  - bcftools/query
+  - bcftools/index
+  - bcftools/filter
+  - bcftools/norm
+  - bcftools/sort
+## TODO nf-core: List all of the channels used as input with a description and their structure
+input:
+  - ch_vcf:
+      type: file
+      description: |
+        The input channel containing the BAM/CRAM/SAM files
+        Structure: [ val(meta), path(vcfs), path(tbis)]
+        pattern: "*.vcf*"
+  - ch_fasta:
+      type: file
+      description: |
+        fasta file for calling gvcf
+  - ch_fai:
+      type: file
+      description: |
+        fai file for calling gvcf
+  - ch_bed:
+      type: file
+      description: |
+        bed file for target
+## TODO nf-core: List all of the channels used as output with a descriptions and their structure
+output:
+  - text:
+      type: file
+      description: |
+        Channel containing TEXT files
+        Structure: [ val(meta), path(txt) ]
+      pattern: "*.txt"
+  - vcf:
+      type: file
+      description: |
+        Channel containing indexed VCF files
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.vcf*"
+  - tbi:
+      type: file
+      description: |
+        Channel containing TBI files
+        Structure: [ val(meta), path(tbi) ]
+      pattern: "*.tbi"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@iyamaguchi"
+maintainers:
+  - "@iyamaguchi"

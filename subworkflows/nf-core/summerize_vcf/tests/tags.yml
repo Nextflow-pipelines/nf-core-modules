@@ -1,0 +1,2 @@
+subworkflows/summerize_vcf:
+  - subworkflows/nf-core/summerize_vcf/**
