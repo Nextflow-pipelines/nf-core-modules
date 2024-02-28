@@ -39,7 +39,7 @@ process RSEQC_GENEBODYCOVERAGE2 {
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
-    tuple val(meta), path("${prefix}*"), emit: output
+    tuple val(meta), path("${prefix}.txt"), emit: text
     // TODO nf-core: List additional required output channels/values here
     path "versions.yml"           , emit: versions
 

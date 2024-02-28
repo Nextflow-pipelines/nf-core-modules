@@ -9,6 +9,8 @@ include { RSEQC_JUNCTIONANNOTATION } from '../../../modules/nf-core/rseqc/juncti
 include { RSEQC_JUNCTIONSATURATION } from '../../../modules/nf-core/rseqc/junctionsaturation/main'
 include { RSEQC_READDISTRIBUTION   } from '../../../modules/nf-core/rseqc/readdistribution/main'
 include { RSEQC_READDUPLICATION    } from '../../../modules/nf-core/rseqc/readduplication/main'
+include { RSEQC_GENEBODYCOVERAGE   } from '../../../modules/nf-core/rseqc/genebodycoverage/main'
+include { RSEQC_GENEBODYCOVERAGE2  } from '../../../modules/nf-core/rseqc/genebodycoverage2/main'
 include { RSEQC_TIN                } from '../../../modules/nf-core/rseqc/tin/main'
 
 workflow BAM_RSEQC {
@@ -136,6 +138,17 @@ workflow BAM_RSEQC {
     }
 
     //
+    // Run RSeQC genebody_coverage.py
+    //
+    genebodycoverage_txt = Channel.empty()
+
+    if ('genebodycoverage' in rseqc_modules) {
+        RSEQC_GENEBODYCOVERAGE(bam_bai, bed)
+        genebodycoverage_txt      = RSEQC_GENEBODYCOVERAGE.out.text
+        versions    = versions.mix(RSEQC_GENEBODYCOVERAGE.out.versions.first())
+    }
+
+    //
     // Run RSeQC tin.py
     //
     tin_txt = Channel.empty()
@@ -178,6 +191,8 @@ workflow BAM_RSEQC {
     readduplication_pos_xls         // channel: [ val(meta), xls ]
     readduplication_pdf             // channel: [ val(meta), pdf ]
     readduplication_rscript         // channel: [ val(meta), r   ]
+
+    genebodycoverage_txt            // channel: [ val(meta), txt ]
 
     tin_txt                         // channel: [ val(meta), txt ]
 
