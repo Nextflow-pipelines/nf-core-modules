@@ -38,6 +38,7 @@ process CREATEREPORT_DOCX {
     path(customer_info)
     path(software_versions)
     path(docx_template)
+    path(docx_contents)
     path(pictures)
 
     output:

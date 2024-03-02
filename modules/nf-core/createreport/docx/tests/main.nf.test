@@ -34,6 +34,9 @@ nextflow_process {
                     file(params.test_data['generic']['docx']['test_docx'], checkIfExists: true)
                     ]
                 input[3] = [
+                    file(params.test_data['generic']['yaml']['test_report_contents'], checkIfExists: true)
+                    ]
+                input[4] = [
                     file(params.test_data['generic']['png']['test_workflow_png'], checkIfExists: true),
                     file(params.test_data['generic']['png']['test_contents_png'], checkIfExists: true)
                     ]
@@ -44,11 +47,13 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                //{ assert snapshot(process.out).match() }
                 //TODO nf-core: Add all required assertions to verify the test output.
                 // See https://nf-co.re/docs/contributing/tutorials/nf-test_assertions for more information and examples.
-                { assert process.out.report ==~ "*.docx" },
-                { assert process.out.informations ==~ "all_informations.yml" },
+                //{ assert process.out.report ==~ "*.docx" },
+                //{ assert process.out.informations ==~ "all_informations.yml" },
+                { assert snapshot(process.out.report).match("*.docx") },
+                { assert snapshot(process.out.informations).match("all_informations.yml") },
                 { assert snapshot(process.out.versions).match("versions_docx_fastqc") }
             )
         }

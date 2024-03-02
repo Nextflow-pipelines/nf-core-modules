@@ -2,35 +2,47 @@
     "versions_docx_fastqc": {
         "content": [
             [
-                
+                "versions.yml:md5,07a1221c16a713fc5a5eed4680716fc9"
             ]
         ],
         "meta": {
             "nf-test": "0.8.4",
             "nextflow": "23.10.1"
         },
-        "timestamp": "2024-02-12T20:51:21.186532"
+        "timestamp": "2024-03-02T12:03:30.719695"
+    },
+    "*.docx": {
+        "content": [
+            [
+                "K562\u30fb\u793e\u5185\u8a66\u9a13_CAGE_report_20240302.docx:md5,22f65212297a278bdbfa0df8b155a9d2"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-03-02T12:06:14.411363"
     },
     "docx - fastqc": {
         "content": [
             {
                 "0": [
-                    
+                    "K562\u30fb\u793e\u5185\u8a66\u9a13_CAGE_report_20240302.docx:md5,300ce1b4540a3775155ceb8f4a9b23ff"
                 ],
                 "1": [
-                    
+                    "all_informations.yml:md5,d3b8a23d1f3509717fd8084b9d2a433f"
                 ],
                 "2": [
-                    
+                    "versions.yml:md5,07a1221c16a713fc5a5eed4680716fc9"
                 ],
                 "informations": [
-                    
+                    "all_informations.yml:md5,d3b8a23d1f3509717fd8084b9d2a433f"
                 ],
                 "report": [
-                    
+                    "K562\u30fb\u793e\u5185\u8a66\u9a13_CAGE_report_20240302.docx:md5,300ce1b4540a3775155ceb8f4a9b23ff"
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,07a1221c16a713fc5a5eed4680716fc9"
                 ]
             }
         ],
@@ -38,6 +50,18 @@
             "nf-test": "0.8.4",
             "nextflow": "23.10.1"
         },
-        "timestamp": "2024-02-12T20:42:15.276916"
+        "timestamp": "2024-03-02T12:04:20.944121"
+    },
+    "all_informations.yml": {
+        "content": [
+            [
+                "all_informations.yml:md5,d3b8a23d1f3509717fd8084b9d2a433f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-03-02T12:03:30.710061"
     }
 }
