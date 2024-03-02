@@ -1,4 +1,16 @@
 {
+    "*.docx": {
+        "content": [
+            [
+                "K562\u30fb\u793e\u5185\u8a66\u9a13_CAGE_report_20240302.docx:md5,964d22a8c992520a98604d9ad7716ec8"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-03-02T15:34:02.302964"
+    },
     "versions_docx_fastqc": {
         "content": [
             [
@@ -9,48 +21,7 @@
             "nf-test": "0.8.4",
             "nextflow": "23.10.1"
         },
-        "timestamp": "2024-03-02T12:03:30.719695"
-    },
-    "*.docx": {
-        "content": [
-            [
-                "K562\u30fb\u793e\u5185\u8a66\u9a13_CAGE_report_20240302.docx:md5,22f65212297a278bdbfa0df8b155a9d2"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
-        },
-        "timestamp": "2024-03-02T12:06:14.411363"
-    },
-    "docx - fastqc": {
-        "content": [
-            {
-                "0": [
-                    "K562\u30fb\u793e\u5185\u8a66\u9a13_CAGE_report_20240302.docx:md5,300ce1b4540a3775155ceb8f4a9b23ff"
-                ],
-                "1": [
-                    "all_informations.yml:md5,d3b8a23d1f3509717fd8084b9d2a433f"
-                ],
-                "2": [
-                    "versions.yml:md5,07a1221c16a713fc5a5eed4680716fc9"
-                ],
-                "informations": [
-                    "all_informations.yml:md5,d3b8a23d1f3509717fd8084b9d2a433f"
-                ],
-                "report": [
-                    "K562\u30fb\u793e\u5185\u8a66\u9a13_CAGE_report_20240302.docx:md5,300ce1b4540a3775155ceb8f4a9b23ff"
-                ],
-                "versions": [
-                    "versions.yml:md5,07a1221c16a713fc5a5eed4680716fc9"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
-        },
-        "timestamp": "2024-03-02T12:04:20.944121"
+        "timestamp": "2024-03-02T15:32:17.49798"
     },
     "all_informations.yml": {
         "content": [
@@ -62,6 +33,6 @@
             "nf-test": "0.8.4",
             "nextflow": "23.10.1"
         },
-        "timestamp": "2024-03-02T12:03:30.710061"
+        "timestamp": "2024-03-02T15:32:17.492433"
     }
 }
